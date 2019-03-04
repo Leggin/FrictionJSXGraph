@@ -31,22 +31,22 @@ class Sphere {
 
         this.pos.add(this.velocity);
 
-        if (this.pos.y <= constants.bottom) {
+        if (this.pos.y <= constants.bottom + this.mass / 6) {
             this.velocity.y *= -1;
-            this.pos.y = constants.bottom;
+            this.pos.y = constants.bottom + this.mass / 6;
         }
-        else if (this.pos.y >= constants.top) {
+        else if (this.pos.y >= constants.top - this.mass / 6) {
             this.velocity.y *= -1;
-            this.pos.y = constants.top;
+            this.pos.y = constants.top - this.mass / 6;
 
         }
-        else if (this.pos.x <= constants.left) {
+        else if (this.pos.x <= constants.left + this.mass / 6) {
             this.velocity.x *= -1;
-            this.pos.x = constants.left;
+            this.pos.x = constants.left + this.mass / 6;
         }
-        else if (this.pos.x >= constants.right) {
+        else if (this.pos.x >= constants.right - this.mass / 6) {
             this.velocity.x *= -1;
-            this.pos.x = constants.right;
+            this.pos.x = constants.right - this.mass / 6;
         }
         this.acceleration.mult(0);
 
