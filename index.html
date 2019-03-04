@@ -1,20 +1,24 @@
 <head>
     <link rel="stylesheet" type="text/css" href="//jsxgraph.uni-bayreuth.de/distrib/jsxgraph.css" />
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+
     <script type="text/javascript" src="//jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js"></script>
 
 </head>
 
 <body>
+    <div class="bounce-container">
+        <div id="jxgbox" class="jxgbox" style="width:600px; height:600px;"></div>
 
-    <div id="jxgbox" class="jxgbox" style="width:600px; height:600px;"></div>
+
+        <div class="slidecontainer">
+            <input type="range" min="1" max="100" value="1" class="slider" id="htmlSlider">
+        </div>
+    </div>
+
     <script src="Sphere.js"> </script>
     <script src="Vector.js"> </script>
     <script src="Utilities.js"> </script>
     <script src="Constants.js"> </script>
-
     <script src="Main.js"> </script>
-
-
-
-
 </body>

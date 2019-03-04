@@ -53,6 +53,10 @@ class Vector {
         this.y *= value;
     }
 
+    copy() {
+        return new Vector(this.x, this.y);
+    }
+
     distance(vector) {
         let a = Math.pow(vector.x - this.x, 2);
         let b = Math.pow(vector.y - this.y, 2);

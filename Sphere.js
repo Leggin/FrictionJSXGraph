@@ -1,12 +1,13 @@
 
 class Sphere {
-    constructor(board, x, y) {
+    constructor(board, x, y, friction = 0) {
         this.board = board;
-        this.pos = new Vector(x, y)
+        this.pos = new Vector(x, y);
+        this.mass = Math.ceil(Math.random() * 20)
         this.velocity = new Vector();
         this.acceleration = new Vector();
-        this.point = board.create('point', [() => { return this.pos.x }, () => { return this.pos.y }], { showInfobox: false, strokeColor: "#555555", fillColor: "#888888", withLabel: false, size: 3 });
-        this.frictionMag = 0.005;
+        this.point = board.create('point', [() => { return this.pos.x }, () => { return this.pos.y }], { showInfobox: false, strokeColor: "#555555", fillColor: "#888888", withLabel: false, size: this.mass });
+        this.frictionMag = friction;
         this.gravity = new Vector(0, -0.05);
     }
 
@@ -16,28 +17,39 @@ class Sphere {
     }
 
     update() {
-
-        let friction = new Vector(this.velocity.x, this.velocity.y);
+        let friction = this.velocity.copy();
         friction.mult(-1);
         friction.normalize();
         friction.mult(this.frictionMag);
 
         this.applyForce(friction);
-
-        this.applyForce(this.gravity);
+        let g = this.gravity.copy();
+        g.y *= this.mass * 0.2;
+        this.applyForce(g);
 
         this.velocity.add(this.acceleration);
 
-        if (this.pos.y + this.velocity.y < constants.bottom || this.pos.y + this.velocity.y > constants.top) {
-            this.velocity.y *= -1;
-        }
-
-        if (this.pos.x + this.velocity.x < constants.left || this.pos.x + this.velocity.x > constants.right) {
-            this.velocity.x *= -1;
-        }
-
         this.pos.add(this.velocity);
+
+        if (this.pos.y <= constants.bottom) {
+            this.velocity.y *= -1;
+            this.pos.y = constants.bottom;
+        }
+        else if (this.pos.y >= constants.top) {
+            this.velocity.y *= -1;
+            this.pos.y = constants.top;
+
+        }
+        else if (this.pos.x <= constants.left) {
+            this.velocity.x *= -1;
+            this.pos.x = constants.left;
+        }
+        else if (this.pos.x >= constants.right) {
+            this.velocity.x *= -1;
+            this.pos.x = constants.right;
+        }
         this.acceleration.mult(0);
+
 
     }
 }
