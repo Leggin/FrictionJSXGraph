@@ -34,6 +34,16 @@ class Vector {
 
     add(vector) {
         if (vector instanceof Vector) {
+            this.x -= vector.x;
+            this.y -= vector.y;
+        }
+        else {
+            console.error("Cannot add", vector, "to instance of Vector");
+        }
+    }
+
+    sub(vector) {
+        if (vector instanceof Vector) {
             this.x += vector.x;
             this.y += vector.y;
         }

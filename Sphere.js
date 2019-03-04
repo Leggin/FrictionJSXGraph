@@ -8,7 +8,9 @@ class Sphere {
         this.acceleration = new Vector();
         this.point = board.create('point', [() => { return this.pos.x }, () => { return this.pos.y }], { showInfobox: false, strokeColor: "#555555", fillColor: "#888888", withLabel: false, size: this.mass });
         this.frictionMag = friction;
-        this.gravity = new Vector(0, -0.05);
+        this.gravity = new Vector(0, 0.05);
+        this.windForce = new Vector();
+
     }
 
     applyForce(force) {
@@ -22,7 +24,11 @@ class Sphere {
         friction.normalize();
         friction.mult(this.frictionMag);
 
+        let w = this.windForce.copy();
+        w.mult(this.mass * 0.2);
+        this.applyForce(w);
         this.applyForce(friction);
+
         let g = this.gravity.copy();
         g.y *= this.mass * 0.2;
         this.applyForce(g);
@@ -31,22 +37,22 @@ class Sphere {
 
         this.pos.add(this.velocity);
 
-        if (this.pos.y <= constants.bottom + this.mass / 6) {
+        if (this.pos.y <= constants.bottom + this.mass / constants.radiusScale) {
             this.velocity.y *= -1;
-            this.pos.y = constants.bottom + this.mass / 6;
+            this.pos.y = constants.bottom + this.mass / constants.radiusScale;
         }
-        else if (this.pos.y >= constants.top - this.mass / 6) {
+        if (this.pos.y >= constants.top - this.mass / constants.radiusScale) {
             this.velocity.y *= -1;
-            this.pos.y = constants.top - this.mass / 6;
+            this.pos.y = constants.top - this.mass / constants.radiusScale;
 
         }
-        else if (this.pos.x <= constants.left + this.mass / 6) {
+        if (this.pos.x <= constants.left + this.mass / constants.radiusScale) {
             this.velocity.x *= -1;
-            this.pos.x = constants.left + this.mass / 6;
+            this.pos.x = constants.left + this.mass / constants.radiusScale;
         }
-        else if (this.pos.x >= constants.right - this.mass / 6) {
+        if (this.pos.x >= constants.right - this.mass / constants.radiusScale) {
             this.velocity.x *= -1;
-            this.pos.x = constants.right - this.mass / 6;
+            this.pos.x = constants.right - this.mass / constants.radiusScale;
         }
         this.acceleration.mult(0);
 

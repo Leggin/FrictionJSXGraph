@@ -56,7 +56,7 @@ class Utilities {
 
     static coordsSimilar(a, b) {
 
-        if (Math.abs(a[0] - b[0]) < 5 && Math.abs(a[0] - b[0]) < 5) {
+        if (Math.abs(a[0] - b[0]) < 3 && Math.abs(a[1] - b[1]) < 3) {
             return true;
         }
         return false;
