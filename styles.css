@@ -32,3 +32,9 @@
 .bounce-container{
     display: inline-flex;
 }
+
+p{
+    font-family: Helvetica Neue,sans-serif;
+    text-align: center;
+    color: #525252
+}
