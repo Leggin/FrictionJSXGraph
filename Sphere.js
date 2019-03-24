@@ -6,11 +6,15 @@ class Sphere {
         this.mass = Math.ceil(Math.random() * 20)
         this.velocity = new Vector();
         this.acceleration = new Vector();
-        this.point = board.create('point', [() => { return this.pos.x }, () => { return this.pos.y }], { showInfobox: false, strokeColor: "#555555", fillColor: "#888888", withLabel: false, size: this.mass });
+        this.point = board.create('point', [() => { return this.pos.x }, () => { return this.pos.y }], { showInfobox: false, strokeColor: this.getRandomColor(), fillColor: this.getRandomColor(), withLabel: false, size: this.mass });
         this.frictionMag = friction;
         this.gravity = new Vector(0, 0.05);
         this.windForce = new Vector();
 
+    }
+
+    getRandomColor() {
+        return '#' + (Math.random() * 0xFFFFFF << 0).toString(16);
     }
 
     applyForce(force) {

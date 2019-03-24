@@ -8,14 +8,14 @@
 
 <body>
     <div class="bounce-container">
+        <input type="range" min="1" max="100" value="1" class="slider" id="htmlSlider">
+        <p>Friction <span id="output"></span> </p>
         <div id="jxgbox" class="jxgbox" style="width:600px; height:600px;"></div>
-
-
-        <div class="slidecontainer">
-            <input type="range" min="1" max="100" value="1" class="slider" id="htmlSlider">
-            <p>Friction <span id="output"></span> </p>
-        </div>
     </div>
+
+    <p><code>Click to add new Spheres to the Simulation.</code><br>
+        <code>Drag the tape measure around to control the wind.</code><br>
+        <code>Adjust the top slider to manipulate the friciton.</code></p>
 
     <script src="Sphere.js"> </script>
     <script src="Vector.js"> </script>
